@@ -86,6 +86,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    RobotContainer.shooter.shooter.clearFaults();
+    RobotContainer.shooter.shooter.restoreFactoryDefaults();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -98,7 +100,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    
+
     //Color Sensor
     int proximity = m_colorSensor.getProximity();
     SmartDashboard.putNumber("Proximity", proximity);
@@ -140,8 +142,8 @@ public class Robot extends TimedRobot {
       RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_1);
     }else if (RobotContainer.operatorB.get()){
       RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_2);
-    }else if(RobotContainer.operatorY.get()){
-      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_3);
+    //}else if(RobotContainer.operatorY.get()){
+    // RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_3);
     }else{
       RobotContainer.shooter.setShooterPower(0);
     }

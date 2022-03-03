@@ -78,7 +78,7 @@ public final class Constants {
 
     //Constant Numbers
     public static final double COLLECTION_SPEED = 0.4;
-    public static final double COLLECTION_ROLLER_SPEED = 0.35;
+    public static final double COLLECTION_ROLLER_SPEED = 0.45;
     public static final double TRANSFER_SPEED = 1;
     public static final double PROXIMITY = 100;
     public static final double SHOOTER_SPEED_1 = 0.8;
