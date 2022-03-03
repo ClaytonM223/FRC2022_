@@ -6,6 +6,7 @@ package frc.robot;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   private static RobotContainer m_robotContainer;
   private final I2C.Port i2c = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2c);
+  private static final PowerDistribution pdh = new PowerDistribution();
 
 
   /**
@@ -50,6 +52,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
+    SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
