@@ -54,7 +54,7 @@ public class RobotContainer {
   public double GetDriverRawAxis(final int axis){
     return driverController.getRawAxis(axis);
   }
-  public double GetOperaterRawAxis(final int axis){
+  public double GetOperatorRawAxis(final int axis){
     return operatorController.getRawAxis(axis);
   }
 

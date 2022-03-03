@@ -170,7 +170,75 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+     
+    //Color Sensor
+    int proximity = m_colorSensor.getProximity();
+    SmartDashboard.putNumber("Proximity", proximity);
+
+    //Arcade Drive
+    if (RobotContainer.driverRightBumper.get()){
+      double turn = Robot.m_robotContainer.GetOperatorRawAxis(Constants.OPERATOR_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
+      double move = Robot.m_robotContainer.GetOperatorRawAxis(Constants.OPERATOR_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
+      RobotContainer.driveTrain.manualDrive(move, turn);
+    }else{
+      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID);
+      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
+      RobotContainer.driveTrain.manualDrive(move, turn);
+    }
+     
+
+    //Intake
+    if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02)){
+      RobotContainer.intake.setIntakePower(-Constants.COLLECTION_SPEED, -Constants.COLLECTION_ROLLER_SPEED);
+    }else if (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02){
+      RobotContainer.intake.setIntakePower(Constants.COLLECTION_SPEED , Constants.COLLECTION_ROLLER_SPEED);
+    }else{
+      RobotContainer.intake.setIntakePower(0, 0);
+    }
+
+    //Transfer
+    if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02)){
+      RobotContainer.transfer.setTransferPower(-Constants.TRANSFER_SPEED);
+    }else if (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02){
+      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
+    }else if (m_colorSensor.getProximity() < Constants.PROXIMITY){
+      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
+    }else{
+      RobotContainer.transfer.setTransferPower(0);
+    }
+
+    //Shooter
+    if (RobotContainer.operatorA.get()){
+      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_1);
+    }else if (RobotContainer.operatorB.get()){
+      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_2);
+    }else if(RobotContainer.operatorY.get()){
+      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_3);
+    }else{
+      RobotContainer.shooter.setShooterPower(0);
+    }
+
+    //Lifts
+    //Left Lift
+    if (RobotContainer.operatorleftBumper.get()){
+      RobotContainer.lift.Leftlift(Constants.LIFT_SPEED);
+    }else{
+      RobotContainer.lift.Leftlift(0);
+    }
+    //Right Lift
+    if (RobotContainer.operatorRightBumper.get()){
+      RobotContainer.lift.Rightlift(Constants.LIFT_SPEED);
+    }else{
+      RobotContainer.lift.Rightlift(0);
+    }
+    //Both lift
+    if(RobotContainer.operatorX.get()){
+      RobotContainer.lift.liftBoth(Constants.LIFT_SPEED);
+    }else{
+      RobotContainer.lift.liftBoth(0);
+    }
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
