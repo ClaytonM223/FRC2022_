@@ -14,6 +14,7 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
   public Shooter() {
     shooter.restoreFactoryDefaults();
+    shooter.clearFaults();
   }
   public void setShooterPower(double speed){
     shooter.set(speed);

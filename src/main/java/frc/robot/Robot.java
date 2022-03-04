@@ -71,8 +71,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    RobotContainer.shooter.setShooterPower(0.5);
-    // schedule the autonomous command (example)
+        // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -80,14 +79,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {
-    
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
-    RobotContainer.shooter.shooter.clearFaults();
-    RobotContainer.shooter.shooter.restoreFactoryDefaults();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
