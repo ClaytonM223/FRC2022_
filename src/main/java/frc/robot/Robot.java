@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
       RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_2);
     //}else if(RobotContainer.operatorY.get()){
     // RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_3);
-    }else{
+    }else if (RobotContainer.operatorY.get()){
       RobotContainer.shooter.setShooterPower(0);
     }
 
