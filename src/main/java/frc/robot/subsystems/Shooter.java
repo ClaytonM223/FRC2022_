@@ -15,6 +15,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     shooter.restoreFactoryDefaults();
     shooter.clearFaults();
+    shooter.setSmartCurrentLimit(35);
   }
   public void setShooterPower(double speed){
     shooter.set(speed);
