@@ -4,10 +4,12 @@
 
 package frc.robot;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -73,8 +75,44 @@ public class Robot extends TimedRobot {
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  final double motorMinSpeed = 0.01;
+  final double kP = 0.05;
+  final double kI = 0.5;
+  final double kD = 0.1;
+  final double iLimit = 0.5;
+  final double wheelCircumference = 8 * Math.PI;
+  final double wheelCircumferneceFT = wheelCircumference/12;
+  final double WheelrotationsPerFoot = 1/wheelCircumferneceFT;
+  final double ticksPerRotation = 2048*12.75;
+  final double ticksPerFoot = ticksPerRotation*WheelrotationsPerFoot;
+  double leftTargetError = 0;
+  double rightTargetError = 0;
+  double lastTimestamp = 0;
+  double lastError = 0;
+  private final Timer m_timer = new Timer();
+  double Target;
+  double m_target;
+
   @Override
   public void autonomousInit() {
+    m_timer.stop();
+    m_timer.reset();
+    m_timer.start();
+    RobotContainer.driveTrain.frontRight.setOpenLoopRampRate(1);
+    RobotContainer.driveTrain.backRight.setOpenLoopRampRate(1);
+    RobotContainer.driveTrain.frontLeft.setOpenLoopRampRate(1);
+    RobotContainer.driveTrain.backLeft.setOpenLoopRampRate(1);
+    RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
+    leftTargetError = 0;
+    rightTargetError = 0;
+    lastTimestamp = 0;
+    lastTimestamp = Timer.getFPGATimestamp();
+    lastError = 0;
+
+    RobotContainer.driveTrain.frontRight.getEncoder();
         // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
