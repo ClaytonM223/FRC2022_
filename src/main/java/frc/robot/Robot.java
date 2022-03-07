@@ -4,6 +4,8 @@
 
 package frc.robot;
 import com.revrobotics.ColorSensorV3;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -65,7 +67,12 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kCoast);
+    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
+    RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
+    RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
+  }
 
   @Override
   public void disabledPeriodic() {
@@ -78,8 +85,13 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_timer.reset();
     m_timer.start();
+    RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
 
-    
+    RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
+    RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -90,14 +102,25 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    //RobotContainer.shooter.shooter.set(AutoNumbers.ShooterPower);
-    if (m_timer.get() < TargetTime){
-      RobotContainer.driveTrain.manualDrive(-0.25, 0);
+    RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);;
+    if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
+      RobotContainer.driveTrain.manualDrive(0.5, 0);
     }else{
       RobotContainer.driveTrain.manualDrive(0, 0);
     }
-    if (m_timer.get() >= 15){
-      disabledInit();
+
+    if (m_timer.get() >= AutoNumbers.LaunchTime){
+      RobotContainer.transfer.setTransferPower(1);
+    }else if (m_colorSensor.getProximity() < Constants.PROXIMITY){
+      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
+    }else{
+      RobotContainer.transfer.setTransferPower(0);
+    }
+
+
+    if (m_timer.get() > 10){
+      RobotContainer.transfer.setTransferPower(0);
+      RobotContainer.shooter.setShooterPower(0);;
     }
 
     

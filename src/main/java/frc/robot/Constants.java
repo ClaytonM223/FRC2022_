@@ -89,8 +89,9 @@ public final class Constants {
     public static final double SpeedButtonTurnCoeffecient = 0.60;
 
 public final class AutoNumbers{
-    public static final double ShooterPower = 0.5;
-    public static final double DriveTime = 0.5;
+    public static final double ShooterPower = 0.4;
+    public static final double DriveTime = 3.75;
+    public static final double LaunchTime = 6;
 }
     
 
