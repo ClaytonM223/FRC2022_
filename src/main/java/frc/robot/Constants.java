@@ -81,8 +81,8 @@ public final class Constants {
     public static final double COLLECTION_ROLLER_SPEED = 0.45;
     public static final double TRANSFER_SPEED = 1;
     public static final double PROXIMITY = 100;
-    public static final double SHOOTER_SPEED_1 = 0.8;
-    public static final double SHOOTER_SPEED_2 = 0.9;
+    public static final double SHOOTER_SPEED_1 = 0.7;
+    public static final double SHOOTER_SPEED_2 = 0.8;
     public static final double SHOOTER_SPEED_3 = 1;
     public static final double LIFT_SPEED = 1;
     public static final double SpeedButtonMoveCoeffecient = 0.5;
