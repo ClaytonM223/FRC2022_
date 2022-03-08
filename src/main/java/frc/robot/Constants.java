@@ -89,12 +89,17 @@ public final class Constants {
     public static final double SpeedButtonTurnCoeffecient = 0.60;
 
 public final class AutoNumbers{
+    public static final double DriveSpeed = 0.5;
     public static final double ShooterPower = 0.4;
     public static final double DriveTime = 3;
     public static final double TurnTime = 5.6;
     public static final double DriveTime2 = 6.7;
     public static final double LaunchTime = 6;
     public static final double Turn2Time = 8.3;
+}
+public final class HardwareNumbers{
+    public static final double GearRatio = 10.71;
+    public static final double WheelDiameter = 6;
 }
     
 

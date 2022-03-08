@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.AutoNumbers;
+import frc.robot.commands.EncoderDrive;
 import frc.robot.subsystems.Shooter;
 
 
@@ -26,6 +27,8 @@ import frc.robot.subsystems.Shooter;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+
+  private EncoderDrive encoderDrive = new EncoderDrive(0);
 
   private static RobotContainer m_robotContainer;
   private final I2C.Port i2c = I2C.Port.kOnboard;
@@ -85,6 +88,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    /*
     m_timer.reset();
     m_timer.start();
     RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
@@ -95,8 +99,10 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
     RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
 
-    
+    */
     // schedule the autonomous command (example)
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

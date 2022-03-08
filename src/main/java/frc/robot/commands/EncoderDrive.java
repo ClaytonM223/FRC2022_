@@ -8,11 +8,20 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.AutoNumbers;
+import frc.robot.Constants.HardwareNumbers;
 
 public class EncoderDrive extends CommandBase {
   double target;
+  double ticksToTarget;
   double rightOffset;
   double leftOffset;
+
+  final double wheelCircumference = HardwareNumbers.WheelDiameter * Math.PI;
+  final double wheelCircumferneceFT = wheelCircumference/12;
+  final double WheelrotationsPerFoot = 1/wheelCircumferneceFT;
+  final double ticksPerRotation = 42*HardwareNumbers.GearRatio;
+  final double ticksPerFoot = ticksPerRotation*WheelrotationsPerFoot;
 
   /** Creates a new EncoderDrive. */
   public EncoderDrive(double distance) {
@@ -29,7 +38,6 @@ public class EncoderDrive extends CommandBase {
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,8 +45,27 @@ public class EncoderDrive extends CommandBase {
   public void execute() {
     double rightEncoder = RobotContainer.driveTrain.rightEncoder.getPosition() - rightOffset;
     double leftEncoder = RobotContainer.driveTrain.leftEncoder.getPosition() - leftOffset;
-
-
+    ticksToTarget = target * ticksPerFoot;
+    if (ticksToTarget > rightEncoder){
+      RobotContainer.driveTrain.tankDrive(0, AutoNumbers.DriveSpeed);
+    }else{
+      RobotContainer.driveTrain.tankDrive(0, 0);
+    }
+    if (ticksToTarget > leftEncoder){
+      RobotContainer.driveTrain.tankDrive(AutoNumbers.DriveSpeed, 0);
+    }else{
+      RobotContainer.driveTrain.tankDrive(0, 0);
+    }
+    if (ticksToTarget < rightEncoder){
+      RobotContainer.driveTrain.tankDrive(0, AutoNumbers.DriveSpeed);
+    }else{
+      RobotContainer.driveTrain.tankDrive(0, 0);
+    }
+    if (ticksToTarget < leftEncoder){
+      RobotContainer.driveTrain.tankDrive(AutoNumbers.DriveSpeed, 0);
+    }else{
+      RobotContainer.driveTrain.tankDrive(0, 0);
+    }
   }
 
   // Called once the command ends or is interrupted.
