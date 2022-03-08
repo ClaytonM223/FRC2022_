@@ -5,7 +5,6 @@
 package frc.robot;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -96,6 +95,7 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
     RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
 
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -105,6 +105,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+
+
+    /*
     if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
       RobotContainer.driveTrain.manualDrive(0.3, 0);
     }else if((m_timer.get() > 4) && (m_timer.get() < Turntime)){
@@ -123,6 +126,9 @@ public class Robot extends TimedRobot {
     }else{
       RobotContainer.transfer.setTransferPower(0);
     }
+    */
+
+
     /*
     RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
     if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){

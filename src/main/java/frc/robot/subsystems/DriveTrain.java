@@ -5,7 +5,10 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -15,7 +18,9 @@ public class DriveTrain extends SubsystemBase {
   public final CANSparkMax backRight = new CANSparkMax(Constants.RIGHT_BACK_ID , MotorType.kBrushless);
   public final CANSparkMax frontLeft = new CANSparkMax(Constants.LEFT_FRONT_ID , MotorType.kBrushless);
   public final CANSparkMax backLeft = new CANSparkMax(Constants.LEFT_BACK_ID , MotorType.kBrushless);
-  
+
+  public final RelativeEncoder rightEncoder = frontRight.getEncoder(Type.kHallSensor, 42);
+  public final RelativeEncoder leftEncoder = frontLeft.getEncoder(Type.kHallSensor, 42);
 
   public DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
 
@@ -45,6 +50,10 @@ public class DriveTrain extends SubsystemBase {
     
   } 
 
+  public void tankDrive(double left, double right){
+    drive.tankDrive(left, right);
+  }
+ 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
