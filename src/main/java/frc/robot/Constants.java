@@ -90,8 +90,11 @@ public final class Constants {
 
 public final class AutoNumbers{
     public static final double ShooterPower = 0.4;
-    public static final double DriveTime = 3.75;
+    public static final double DriveTime = 3;
+    public static final double TurnTime = 5.6;
+    public static final double DriveTime2 = 6.7;
     public static final double LaunchTime = 6;
+    public static final double Turn2Time = 8.3;
 }
     
 

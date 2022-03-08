@@ -80,6 +80,9 @@ public class Robot extends TimedRobot {
   }
   private static final Timer m_timer = new Timer();
   Double TargetTime = AutoNumbers.DriveTime;
+  double Turntime = AutoNumbers.TurnTime;
+  double driveForward = AutoNumbers.DriveTime2;
+  double Turn2time = AutoNumbers.Turn2Time;
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
@@ -102,7 +105,26 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);;
+    if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
+      RobotContainer.driveTrain.manualDrive(0.3, 0);
+    }else if((m_timer.get() > 4) && (m_timer.get() < Turntime)){
+      RobotContainer.driveTrain.manualDrive(0, 0.5);
+    }else if((m_timer.get() > Turntime) && (m_timer.get() < driveForward)){
+      RobotContainer.driveTrain.manualDrive(-0.5, 0);
+      RobotContainer.intake.setIntakePower(Constants.COLLECTION_SPEED, 0.35);
+    }else if((m_timer.get() > driveForward+1) && (m_timer.get() < Turn2time)){
+      RobotContainer.driveTrain.manualDrive(0, -0.5);
+    //  RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
+    }else{
+      RobotContainer.driveTrain.manualDrive(0, 0);
+    }
+    if (m_colorSensor.getProximity() < Constants.PROXIMITY){
+      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
+    }else{
+      RobotContainer.transfer.setTransferPower(0);
+    }
+    /*
+    RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
     if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
       RobotContainer.driveTrain.manualDrive(0.5, 0);
     }else{
@@ -121,7 +143,7 @@ public class Robot extends TimedRobot {
     if (m_timer.get() > 10){
       RobotContainer.transfer.setTransferPower(0);
       RobotContainer.shooter.setShooterPower(0);;
-    }
+    }*/
 
     
   }
