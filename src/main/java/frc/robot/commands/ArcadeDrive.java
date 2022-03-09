@@ -18,12 +18,18 @@ public class ArcadeDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.driveTrain.manualDrive(0,0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (RobotContainer.driverRightBumper.get()){
+      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient;
+      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient;
+      RobotContainer.driveTrain.manualDrive(move, turn);
+    }else if(RobotContainer.driverleftBumper.get()){
       double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient;
       double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient;
       RobotContainer.driveTrain.manualDrive(move, turn);
