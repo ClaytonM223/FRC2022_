@@ -28,9 +28,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private static RobotContainer m_robotContainer;
 
-  private final I2C.Port i2c = I2C.Port.kOnboard;
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2c);
-
   private static final PowerDistribution pdh = new PowerDistribution();
 
 
@@ -178,6 +175,7 @@ public class Robot extends TimedRobot {
     RobotContainer.arcadeDrive.schedule();
     RobotContainer.nomnom.schedule();
     RobotContainer.lockedAndLoaded.schedule();
+    RobotContainer.yeet.schedule();
 
     //Color Sensor
     //int proximity = m_colorSensor.getProximity();
