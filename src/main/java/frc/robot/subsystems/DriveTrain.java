@@ -40,7 +40,7 @@ public class DriveTrain extends SubsystemBase {
     rightEncoder.setPositionConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio);
     leftEncoder.setVelocityConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio / 60);
     rightEncoder.setVelocityConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio / 60);
-
+    drive.setDeadband(0.2);
     
     drive.feed();
   }
