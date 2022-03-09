@@ -83,12 +83,13 @@ public final class Constants {
     public static final double COLLECTION_ROLLER_SPEED = 0.45;
     public static final double TRANSFER_SPEED = 1;
     public static final double PROXIMITY = 100;
-    public static final double SHOOTER_SPEED_1 = 0.7;
-    public static final double SHOOTER_SPEED_2 = 0.8;
-    public static final double SHOOTER_SPEED_3 = 1;
+    public static final double SHOOTER_SPEED_1 = 0.5;
+    public static final double SHOOTER_SPEED_2 = 0.6;
     public static final double LIFT_SPEED = 1;
     public static final double SpeedButtonMoveCoeffecient = 0.5;
     public static final double SpeedButtonTurnCoeffecient = 0.60;
+    public static final double SpeedButton2MoveCoeffecient = 0.3;
+    public static final double SpeedButton2TurnCoeffecient = 0.45;
 
 public final class AutoNumbers{
     public static final double DriveSpeed = 0.5;

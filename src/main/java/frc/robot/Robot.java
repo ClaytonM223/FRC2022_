@@ -184,6 +184,10 @@ public class Robot extends TimedRobot {
       double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
       double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
       RobotContainer.driveTrain.manualDrive(move, turn);
+    }else if (RobotContainer.driverleftBumper.get()){
+      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButton2TurnCoeffecient;
+      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButton2MoveCoeffecient;
+      RobotContainer.driveTrain.manualDrive(move, turn);
     }else{
       double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID);
       double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
