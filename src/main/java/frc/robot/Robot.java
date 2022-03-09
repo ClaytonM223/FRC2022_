@@ -180,6 +180,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Proximity", proximity);
 
     //Arcade Drive
+<<<<<<< Updated upstream
     if (RobotContainer.driverRightBumper.get()){
       double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
       double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
@@ -193,6 +194,9 @@ public class Robot extends TimedRobot {
       double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
       RobotContainer.driveTrain.manualDrive(move, turn);
     }
+=======
+    
+>>>>>>> Stashed changes
      
 
     //Intake

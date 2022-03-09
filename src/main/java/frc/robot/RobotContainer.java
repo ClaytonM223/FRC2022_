@@ -51,10 +51,10 @@ public class RobotContainer {
   public static final JoystickButton operatorX = new JoystickButton(operatorController, Constants.OPERATOR_X_ID);
   public static final JoystickButton operatorY = new JoystickButton(operatorController, Constants.OPERATOR_Y_ID);
 
-  public double GetDriverRawAxis(final int axis){
+  public static double GetDriverRawAxis(final int axis){
     return driverController.getRawAxis(axis);
   }
-  public double GetOperatorRawAxis(final int axis){
+  public static double GetOperatorRawAxis(final int axis){
     return operatorController.getRawAxis(axis);
   }
 
