@@ -8,12 +8,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CANID;
 
 public class Lift extends SubsystemBase {
   /** Creates a new Lift. */ 
-  final WPI_VictorSPX leftLift = new WPI_VictorSPX(Constants.LEFT_LIFT_ID);
-  final WPI_VictorSPX rightLift = new WPI_VictorSPX(Constants.RIGHT_LIFT_ID);
+  final WPI_VictorSPX leftLift = new WPI_VictorSPX(CANID.LEFT_LIFT_ID);
+  final WPI_VictorSPX rightLift = new WPI_VictorSPX(CANID.RIGHT_LIFT_ID);
   public Lift() {
     leftLift.setInverted(false);
     rightLift.setInverted(false);

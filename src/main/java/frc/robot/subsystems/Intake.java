@@ -9,12 +9,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CANID;
 
 public class Intake extends SubsystemBase {
-  final CANSparkMax leftCollection = new CANSparkMax(Constants.COLLECTION_L_ID , MotorType.kBrushless);
-  final CANSparkMax rightCollection = new CANSparkMax(Constants.COLLECTION_R_ID , MotorType.kBrushless);
-  final WPI_VictorSPX roller = new WPI_VictorSPX(Constants.COLLECTION_ROLLER_ID);
+  final CANSparkMax leftCollection = new CANSparkMax(CANID.COLLECTION_L_ID , MotorType.kBrushless);
+  final CANSparkMax rightCollection = new CANSparkMax(CANID.COLLECTION_R_ID , MotorType.kBrushless);
+  final WPI_VictorSPX roller = new WPI_VictorSPX(CANID.COLLECTION_ROLLER_ID);
   /** Creates a new Intake. */
   public Intake() {
     leftCollection.restoreFactoryDefaults();

@@ -179,25 +179,7 @@ public class Robot extends TimedRobot {
     int proximity = m_colorSensor.getProximity();
     SmartDashboard.putNumber("Proximity", proximity);
 
-    //Arcade Drive
-<<<<<<< Updated upstream
-    if (RobotContainer.driverRightBumper.get()){
-      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
-      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }else if (RobotContainer.driverleftBumper.get()){
-      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButton2TurnCoeffecient;
-      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButton2MoveCoeffecient;
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }else{
-      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID);
-      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }
-=======
-    
->>>>>>> Stashed changes
-     
+    /*
 
     //Intake
     if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02)){
@@ -248,7 +230,7 @@ public class Robot extends TimedRobot {
       RobotContainer.lift.liftBoth(Constants.LIFT_SPEED);
     }else{
       RobotContainer.lift.liftBoth(0);
-    }
+    }*/
   }
 
   @Override

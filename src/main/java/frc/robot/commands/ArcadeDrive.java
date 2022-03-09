@@ -6,6 +6,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.TeleopVariables;
+import frc.robot.Constants.USB;
 
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
@@ -22,12 +24,12 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.driverRightBumper.get()){
-      double turn = RobotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
-      double move = RobotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
+      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient;
+      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient;
       RobotContainer.driveTrain.manualDrive(move, turn);
     }else{
-      double turn = RobotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID);
-      double move = RobotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
+      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID);
+      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID);
       RobotContainer.driveTrain.manualDrive(move, turn);
     }
   }

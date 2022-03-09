@@ -7,18 +7,16 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxRelativeEncoder.Type;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.CANID;
 import frc.robot.Constants.HardwareNumbers;
 
 public class DriveTrain extends SubsystemBase {
-  public final CANSparkMax frontRight = new CANSparkMax(Constants.RIGHT_FRONT_ID , MotorType.kBrushless);
-  public final CANSparkMax backRight = new CANSparkMax(Constants.RIGHT_BACK_ID , MotorType.kBrushless);
-  public final CANSparkMax frontLeft = new CANSparkMax(Constants.LEFT_FRONT_ID , MotorType.kBrushless);
-  public final CANSparkMax backLeft = new CANSparkMax(Constants.LEFT_BACK_ID , MotorType.kBrushless);
+  public final CANSparkMax frontRight = new CANSparkMax(CANID.RIGHT_FRONT_ID , MotorType.kBrushless);
+  public final CANSparkMax backRight = new CANSparkMax(CANID.RIGHT_BACK_ID , MotorType.kBrushless);
+  public final CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
+  public final CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
 
   private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
   private final RelativeEncoder rightEncoder = frontRight.getEncoder();
