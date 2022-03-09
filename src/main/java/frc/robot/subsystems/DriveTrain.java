@@ -3,14 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
-import frc.robot.Constants.HardwareNumbers;
 
 public class DriveTrain extends SubsystemBase {
   public final CANSparkMax frontRight = new CANSparkMax(CANID.RIGHT_FRONT_ID , MotorType.kBrushless);
@@ -18,8 +15,8 @@ public class DriveTrain extends SubsystemBase {
   public final CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
   public final CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
 
-  private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
-  private final RelativeEncoder rightEncoder = frontRight.getEncoder();
+  //private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
+  //private final RelativeEncoder rightEncoder = frontRight.getEncoder();
 
   public DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
 
@@ -30,16 +27,10 @@ public class DriveTrain extends SubsystemBase {
     frontRight.restoreFactoryDefaults();
     backRight.restoreFactoryDefaults();
     frontRight.setInverted(true);
+    backRight.setInverted(true);
     //frontLeft.setInverted(true);
     backRight.follow(frontRight);
     backLeft.follow(frontLeft);
-
-    leftEncoder.setPositionConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio);
-    rightEncoder.setPositionConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio);
-    leftEncoder.setVelocityConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio / 60);
-    rightEncoder.setVelocityConversionFactor(Math.PI * HardwareNumbers.WheelDiameter / HardwareNumbers.GearRatio / 60);
-    drive.setDeadband(0.2);
-    
     drive.feed();
   }
   public void manualDrive(double Move, double Turn){
@@ -53,11 +44,6 @@ public class DriveTrain extends SubsystemBase {
     drive.feed();
     
   } 
-
-  public void tankDrive(double left, double right){
-    drive.tankDrive(left, right);
-  }
- 
   @Override
   public void periodic() {
     drive.feedWatchdog();

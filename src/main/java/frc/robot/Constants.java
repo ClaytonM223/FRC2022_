@@ -82,7 +82,7 @@ public final class Constants {
         public static final double SpeedButtonMoveCoeffecient = 0.5;
         public static final double SpeedButtonTurnCoeffecient = 0.60;
         public static final double SpeedButton2MoveCoeffecient = 0.3;
-        public static final double SpeedButton2TurnCoeffecient = 0.45;
+        public static final double SpeedButton2TurnCoeffecient = 0.55;
     }
     public final class AutoNumbers{
         public static final double DriveSpeed = 0.5;

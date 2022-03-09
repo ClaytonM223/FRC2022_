@@ -175,9 +175,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+    RobotContainer.arcadeDrive.schedule();
+    RobotContainer.nomnom.schedule();
+    RobotContainer.lockedAndLoaded.schedule();
+
     //Color Sensor
-    int proximity = m_colorSensor.getProximity();
-    SmartDashboard.putNumber("Proximity", proximity);
+    //int proximity = m_colorSensor.getProximity();
+    //SmartDashboard.putNumber("Proximity", proximity);
 
     /*
 
@@ -191,15 +195,7 @@ public class Robot extends TimedRobot {
     }
 
     //Transfer
-    if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02)){
-      RobotContainer.transfer.setTransferPower(-Constants.TRANSFER_SPEED);
-    }else if (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else if (m_colorSensor.getProximity() < Constants.PROXIMITY){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else{
-      RobotContainer.transfer.setTransferPower(0);
-    }
+
 
     //Shooter
     if (RobotContainer.operatorA.get()){

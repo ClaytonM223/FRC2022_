@@ -25,18 +25,21 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.driverRightBumper.get()){
-      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient;
-      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient;
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }else if(RobotContainer.driverleftBumper.get()){
-      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient;
-      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient;
-      RobotContainer.driveTrain.manualDrive(move, turn);
+    if (RobotContainer.driverController.getRightBumper()){
+      RobotContainer.driveTrain.manualDrive(
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonTurnCoeffecient,
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonMoveCoeffecient
+        );
+    }else if(RobotContainer.driverController.getLeftBumper()){
+      RobotContainer.driveTrain.manualDrive(
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButton2TurnCoeffecient,
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButton2MoveCoeffecient
+        );
     }else{
-      double turn = RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID);
-      double move = RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID);
-      RobotContainer.driveTrain.manualDrive(move, turn);
+      RobotContainer.driveTrain.manualDrive(
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID),
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)
+        );
     }
   }
 
