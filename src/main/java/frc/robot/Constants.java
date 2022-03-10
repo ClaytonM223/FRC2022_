@@ -85,7 +85,7 @@ public final class Constants {
         public static final double SpeedButton2TurnCoeffecient = 0.55;
         public static final double D_Pad_Down = 180;
         public static final double D_Pad_Right = 90;
-        public static final double D_Pad_Up = 360;
+        public static final double D_Pad_Up = 0;
         public static final double D_Pad_Left = 270;
     }
     public final class AutoNumbers{

@@ -25,16 +25,16 @@ public class YEET extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Right){
-      RobotContainer.shooter.setShooterPower(0.1);
-    }
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Up){
       RobotContainer.shooter.setShooterPower(0.2);
     }
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Left){
+    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Up){
       RobotContainer.shooter.setShooterPower(0.3);
     }
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
+    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Left){
       RobotContainer.shooter.setShooterPower(0.4);
+    }
+    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
+      RobotContainer.shooter.setShooterPower(0.5);
     }
     if (RobotContainer.operatorController.getAButton()){
       RobotContainer.shooter.setShooterPower(0.6);

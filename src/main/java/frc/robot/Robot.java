@@ -104,72 +104,27 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-
     RobotContainer.arcadeDrive.schedule();
     RobotContainer.nomnom.schedule();
     RobotContainer.lockedAndLoaded.schedule();
     RobotContainer.yeet.schedule();
     RobotContainer.upYaGo.schedule();
-
-    //Color Sensor
-    //int proximity = m_colorSensor.getProximity();
-    //SmartDashboard.putNumber("Proximity", proximity);
-
-    /*
-
-    //Intake
-    if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02)){
-      RobotContainer.intake.setIntakePower(-Constants.COLLECTION_SPEED, -Constants.COLLECTION_ROLLER_SPEED);
-    }else if (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02){
-      RobotContainer.intake.setIntakePower(Constants.COLLECTION_SPEED , Constants.COLLECTION_ROLLER_SPEED);
-    }else{
-      RobotContainer.intake.setIntakePower(0, 0);
-    }
-
-    //Transfer
-
-
-    //Shooter
-    if (RobotContainer.operatorA.get()){
-      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_1);
-    }else if (RobotContainer.operatorB.get()){
-      RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_2);
-    //}else if(RobotContainer.operatorY.get()){
-    // RobotContainer.shooter.setShooterPower(Constants.SHOOTER_SPEED_3);
-    }else if (RobotContainer.operatorY.get()){
-      RobotContainer.shooter.setShooterPower(0);
-    }
-
-    //Lifts
-    //Left Lift
-    if (RobotContainer.operatorleftBumper.get()){
-      RobotContainer.lift.Leftlift(Constants.LIFT_SPEED);
-    }else{
-      RobotContainer.lift.Leftlift(0);
-    }
-    //Right Lift
-    if (RobotContainer.operatorRightBumper.get()){
-      RobotContainer.lift.Rightlift(Constants.LIFT_SPEED);
-    }else{
-      RobotContainer.lift.Rightlift(0);
-    }
-    //Both lift
-    if(RobotContainer.operatorX.get()){
-      RobotContainer.lift.liftBoth(Constants.LIFT_SPEED);
-    }else{
-      RobotContainer.lift.liftBoth(0);
-    }*/
   }
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
-    CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    RobotContainer.arcadeDriveOperator.schedule();
+    RobotContainer.nomnom.schedule();
+    RobotContainer.lockedAndLoaded.schedule();
+    RobotContainer.yeet.schedule();
+    RobotContainer.upYaGo.schedule();
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
