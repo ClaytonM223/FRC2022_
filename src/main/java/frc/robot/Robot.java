@@ -4,6 +4,10 @@
 
 package frc.robot;
 import com.revrobotics.CANSparkMax.IdleMode;
+
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +27,9 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  private AddressableLEDBuffer m_ledBuffer;
+  private AddressableLED m_led;
+
   private static RobotContainer m_robotContainer;
 
   private static final PowerDistribution pdh = new PowerDistribution();
@@ -34,6 +41,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    
+    m_led = new AddressableLED(0);
+    m_ledBuffer = new AddressableLEDBuffer(213);
+    m_led.setLength(m_ledBuffer.getLength());
+    m_led.setData(m_ledBuffer);
+    m_led.start();
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -113,6 +127,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
     // Cancels all running commands at the start of test mode.
   }
 
