@@ -5,14 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.RobotContainer;
 import frc.robot.Constants.TeleopVariables;
 import frc.robot.Constants.USB;
 
+
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
   public ArcadeDrive() {
+
     addRequirements(RobotContainer.driveTrain);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -42,6 +46,8 @@ public class ArcadeDrive extends CommandBase {
         );
     }
   }
+
+
 
   // Called once the command ends or is interrupted.
   @Override

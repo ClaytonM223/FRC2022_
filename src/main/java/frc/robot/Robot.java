@@ -26,6 +26,7 @@ import frc.robot.subsystems.Shooter;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+
   private static RobotContainer m_robotContainer;
 
   private static final PowerDistribution pdh = new PowerDistribution();
