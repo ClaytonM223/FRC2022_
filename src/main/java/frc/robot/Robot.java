@@ -176,6 +176,7 @@ public class Robot extends TimedRobot {
     RobotContainer.nomnom.schedule();
     RobotContainer.lockedAndLoaded.schedule();
     RobotContainer.yeet.schedule();
+    RobotContainer.upYaGo.schedule();
 
     //Color Sensor
     //int proximity = m_colorSensor.getProximity();

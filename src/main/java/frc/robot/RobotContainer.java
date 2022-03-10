@@ -10,6 +10,7 @@ import frc.robot.Constants.USB;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
+import frc.robot.commands.UpYaGo;
 import frc.robot.commands.YEET;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -36,6 +37,7 @@ public class RobotContainer {
   public static final NomNom nomnom = new NomNom();
   public static final LockedAndLoaded lockedAndLoaded = new LockedAndLoaded();
   public static final YEET yeet = new YEET();
+  public static final UpYaGo upYaGo = new UpYaGo();
 
   //Driver Controller
   public static final XboxController driverController = new XboxController(USB.DIRVER_CONTROLER_ID);
