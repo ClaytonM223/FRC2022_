@@ -27,10 +27,8 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-
   private static RobotContainer m_robotContainer;
-  private final I2C.Port i2c = I2C.Port.kOnboard;
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2c);
+
   private static final PowerDistribution pdh = new PowerDistribution();
 
 
@@ -78,11 +76,13 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Shooter.shooter.clearFaults();
   }
+  /*
   private static final Timer m_timer = new Timer();
   Double TargetTime = AutoNumbers.DriveTime;
   double Turntime = AutoNumbers.TurnTime;
   double driveForward = AutoNumbers.DriveTime2;
   double Turn2time = AutoNumbers.Turn2Time;
+  */
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
@@ -173,21 +173,17 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    //Color Sensor
-    int proximity = m_colorSensor.getProximity();
-    SmartDashboard.putNumber("Proximity", proximity);
+    RobotContainer.arcadeDrive.schedule();
+    RobotContainer.nomnom.schedule();
+    RobotContainer.lockedAndLoaded.schedule();
+    RobotContainer.yeet.schedule();
+    RobotContainer.upYaGo.schedule();
 
-    //Arcade Drive
-    if (RobotContainer.driverRightBumper.get()){
-      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID)*Constants.SpeedButtonTurnCoeffecient;
-      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID)*Constants.SpeedButtonMoveCoeffecient;
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }else{
-      double turn = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_R_X_ID);
-      double move = Robot.m_robotContainer.GetDriverRawAxis(Constants.DRIVER_L_Y_ID);
-      RobotContainer.driveTrain.manualDrive(move, turn);
-    }
-     
+    //Color Sensor
+    //int proximity = m_colorSensor.getProximity();
+    //SmartDashboard.putNumber("Proximity", proximity);
+
+    /*
 
     //Intake
     if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_R_TRIGGER) > 0.02)){
@@ -199,15 +195,7 @@ public class Robot extends TimedRobot {
     }
 
     //Transfer
-    if (RobotContainer.operatorBack.get() && (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02)){
-      RobotContainer.transfer.setTransferPower(-Constants.TRANSFER_SPEED);
-    }else if (RobotContainer.operatorController.getRawAxis(Constants.OPERATOR_L_TRIGGER) > 0.02){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else if (m_colorSensor.getProximity() < Constants.PROXIMITY){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else{
-      RobotContainer.transfer.setTransferPower(0);
-    }
+
 
     //Shooter
     if (RobotContainer.operatorA.get()){
@@ -238,7 +226,7 @@ public class Robot extends TimedRobot {
       RobotContainer.lift.liftBoth(Constants.LIFT_SPEED);
     }else{
       RobotContainer.lift.liftBoth(0);
-    }
+    }*/
   }
 
   @Override
