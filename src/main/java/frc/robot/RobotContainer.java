@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.Constants.USB;
+import frc.robot.commands.AUTOBackUpShoot;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
@@ -40,6 +41,8 @@ public class RobotContainer {
   public static final LockedAndLoaded lockedAndLoaded = new LockedAndLoaded();
   public static final YEET yeet = new YEET();
   public static final UpYaGo upYaGo = new UpYaGo();
+
+  public static final AUTOBackUpShoot autoBackUpShoot = new AUTOBackUpShoot();
 
   //Driver Controller
   public static final XboxController driverController = new XboxController(USB.DIRVER_CONTROLER_ID);
@@ -75,6 +78,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new AUTOBackUpShoot();
   }
 }

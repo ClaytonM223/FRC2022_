@@ -3,16 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.AutoNumbers;
 import frc.robot.subsystems.Shooter;
 
 
@@ -76,28 +72,10 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Shooter.shooter.clearFaults();
   }
-  /*
-  private static final Timer m_timer = new Timer();
-  Double TargetTime = AutoNumbers.DriveTime;
-  double Turntime = AutoNumbers.TurnTime;
-  double driveForward = AutoNumbers.DriveTime2;
-  double Turn2time = AutoNumbers.Turn2Time;
-  */
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    /*
-    m_timer.reset();
-    m_timer.start();
-    RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
-    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
-    RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
-    RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
 
-    RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
-    RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
-
-    */
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -110,52 +88,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
-
-    /*
-    if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
-      RobotContainer.driveTrain.manualDrive(0.3, 0);
-    }else if((m_timer.get() > 4) && (m_timer.get() < Turntime)){
-      RobotContainer.driveTrain.manualDrive(0, 0.5);
-    }else if((m_timer.get() > Turntime) && (m_timer.get() < driveForward)){
-      RobotContainer.driveTrain.manualDrive(-0.5, 0);
-      RobotContainer.intake.setIntakePower(Constants.COLLECTION_SPEED, 0.35);
-    }else if((m_timer.get() > driveForward+1) && (m_timer.get() < Turn2time)){
-      RobotContainer.driveTrain.manualDrive(0, -0.5);
-    //  RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
-    }else{
-      RobotContainer.driveTrain.manualDrive(0, 0);
-    }
-    if (m_colorSensor.getProximity() < Constants.PROXIMITY){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else{
-      RobotContainer.transfer.setTransferPower(0);
-    }
-    */
-
-
-    /*
-    RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
-    if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
-      RobotContainer.driveTrain.manualDrive(0.5, 0);
-    }else{
-      RobotContainer.driveTrain.manualDrive(0, 0);
-    }
-
-    if (m_timer.get() >= AutoNumbers.LaunchTime){
-      RobotContainer.transfer.setTransferPower(1);
-    }else if (m_colorSensor.getProximity() < Constants.PROXIMITY){
-      RobotContainer.transfer.setTransferPower(Constants.TRANSFER_SPEED);
-    }else{
-      RobotContainer.transfer.setTransferPower(0);
-    }
-
-
-    if (m_timer.get() > 10){
-      RobotContainer.transfer.setTransferPower(0);
-      RobotContainer.shooter.setShooterPower(0);;
-    }*/
-
-    
   }
 
   @Override
