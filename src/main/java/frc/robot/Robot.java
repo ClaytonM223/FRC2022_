@@ -7,12 +7,12 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.HardwareNumbers;
 import frc.robot.subsystems.Shooter;
 
 
@@ -27,10 +27,11 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  private static RobotContainer m_robotContainer;
+
   private AddressableLEDBuffer m_ledBuffer;
   private AddressableLED m_led;
-
-  private static RobotContainer m_robotContainer;
+  private int m_rainbowFirstPixelHue;
 
   private static final PowerDistribution pdh = new PowerDistribution();
 
@@ -41,13 +42,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    
+
     m_led = new AddressableLED(0);
-    m_ledBuffer = new AddressableLEDBuffer(213);
+    m_ledBuffer = new AddressableLEDBuffer(HardwareNumbers.NumberOfLEDs);
     m_led.setLength(m_ledBuffer.getLength());
     m_led.setData(m_ledBuffer);
     m_led.start();
-
+    
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -65,12 +66,43 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter Current", Shooter.shooter.getOutputCurrent());
+
+    // Fill the buffer with a rainbow
+    rainbow();
+    // Set the LEDs
+    m_led.setData(m_ledBuffer);
+
+    // Uncomment below and comment above for solid colors.
+    /*
+    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+        // Sets the specified LED to the RGB values for red
+        m_ledBuffer.setRGB(i, r value, g value, b value);
+     }
+     m_led.setData(m_ledBuffer);
+     */
+
+
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+  }
+
+  private void rainbow() {
+    // For every pixel
+    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+      // Calculate the hue - hue is easier for rainbows because the color
+      // shape is a circle so only one value needs to precess
+      final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_ledBuffer.getLength())) % 180;
+      // Set the value
+      m_ledBuffer.setHSV(i, hue, 255, 128);
+    }
+    // Increase by to make the rainbow "move"
+    m_rainbowFirstPixelHue += 3;
+    // Check bounds
+    m_rainbowFirstPixelHue %= 180;
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -135,13 +167,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {
-    RobotContainer.arcadeDriveOperator.schedule();
-    RobotContainer.nomnom.schedule();
-    RobotContainer.lockedAndLoaded.schedule();
-    RobotContainer.yeet.schedule();
-    RobotContainer.upYaGo.schedule();
-  }
+  public void testPeriodic() {}
 
   /** This function is called once when the robot is first started up. */
   @Override

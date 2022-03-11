@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.USB;
 import frc.robot.commands.AUTOBackUpShoot;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ArcadeDriveOperator;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
 import frc.robot.commands.UpYaGo;
@@ -38,11 +37,11 @@ public class RobotContainer {
   public static final Lift lift = new Lift();
 
   public static final ArcadeDrive arcadeDrive = new ArcadeDrive();
-  public static final ArcadeDriveOperator arcadeDriveOperator = new ArcadeDriveOperator();
   public static final NomNom nomnom = new NomNom();
   public static final LockedAndLoaded lockedAndLoaded = new LockedAndLoaded();
   public static final YEET yeet = new YEET();
   public static final UpYaGo upYaGo = new UpYaGo();
+
 
   public static final AUTOBackUpShoot autoBackUpShoot = new AUTOBackUpShoot();
 

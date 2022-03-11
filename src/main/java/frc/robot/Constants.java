@@ -97,6 +97,6 @@ public final class Constants {
     public final static class HardwareNumbers{
         public static final double GearRatio = 10.71;
         public final static double WheelDiameter = Units.inchesToMeters(6);
-        public static final double NumberOfLEDs = 213;
+        public static final int NumberOfLEDs = 213;
     } 
 }
