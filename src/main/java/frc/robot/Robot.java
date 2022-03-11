@@ -29,10 +29,6 @@ public class Robot extends TimedRobot {
 
   private static RobotContainer m_robotContainer;
 
-  private AddressableLEDBuffer m_ledBuffer;
-  private AddressableLED m_led;
-  private int m_rainbowFirstPixelHue;
-
   private static final PowerDistribution pdh = new PowerDistribution();
 
 
@@ -42,13 +38,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
-    m_led = new AddressableLED(0);
-    m_ledBuffer = new AddressableLEDBuffer(HardwareNumbers.NumberOfLEDs);
-    m_led.setLength(m_ledBuffer.getLength());
-    m_led.setData(m_ledBuffer);
-    m_led.start();
-    
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -67,21 +56,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter Current", Shooter.shooter.getOutputCurrent());
 
-    // Fill the buffer with a rainbow
-    rainbow();
-    // Set the LEDs
-    m_led.setData(m_ledBuffer);
-
-    // Uncomment below and comment above for solid colors.
-    /*
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-        // Sets the specified LED to the RGB values for red
-        m_ledBuffer.setRGB(i, r value, g value, b value);
-     }
-     m_led.setData(m_ledBuffer);
-     */
-
-
+    RobotContainer.leds.setLED(0.61); 
+    
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
@@ -90,20 +66,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
   }
 
-  private void rainbow() {
     // For every pixel
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
-      // Calculate the hue - hue is easier for rainbows because the color
-      // shape is a circle so only one value needs to precess
-      final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_ledBuffer.getLength())) % 180;
-      // Set the value
-      m_ledBuffer.setHSV(i, hue, 255, 128);
-    }
-    // Increase by to make the rainbow "move"
-    m_rainbowFirstPixelHue += 3;
-    // Check bounds
-    m_rainbowFirstPixelHue %= 180;
-  }
+    
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override

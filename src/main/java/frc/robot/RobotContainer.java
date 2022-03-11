@@ -17,6 +17,7 @@ import frc.robot.commands.YEET;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
@@ -35,6 +36,7 @@ public class RobotContainer {
   public static final Transfer transfer = new Transfer();
   public static final Shooter shooter = new Shooter();
   public static final Lift lift = new Lift();
+  public static final LEDs leds = new LEDs();
 
   public static final ArcadeDrive arcadeDrive = new ArcadeDrive();
   public static final NomNom nomnom = new NomNom();
