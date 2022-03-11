@@ -5,14 +5,12 @@
 package frc.robot;
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.HardwareNumbers;
 import frc.robot.subsystems.Shooter;
 
 
@@ -38,6 +36,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotContainer.leds.setLED(0.);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -55,8 +54,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter Current", Shooter.shooter.getOutputCurrent());
-
-    RobotContainer.leds.setLED(0.61); 
     
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
@@ -72,6 +69,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    RobotContainer.leds.setLED(0.71);
     RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
@@ -80,12 +78,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+
     Shooter.shooter.clearFaults();
   }
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
+    RobotContainer.leds.setLED(0.77);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -102,6 +101,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    if(DriverStation.getAlliance() == DriverStation.Alliance.Blue){
+      RobotContainer.leds.setLED(0.87);
+    }else{
+      RobotContainer.leds.setLED(0.61); 
+    }
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -123,9 +127,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
     // Cancels all running commands at the start of test mode.
   }
 

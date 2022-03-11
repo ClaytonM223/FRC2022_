@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.TeleopVariables;
-import frc.robot.Constants.USB;
 
 public class NomNom extends CommandBase {
   /** Creates a new NomNom. */
@@ -25,9 +24,9 @@ public class NomNom extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((RobotContainer.GetOperatorRawAxis(USB.OPERATOR_L_TRIGGER) > 0.2) && (RobotContainer.operatorController.getBackButton())){
+    if ((RobotContainer.operatorController.getLeftBumper()) && (RobotContainer.operatorController.getBackButton())){
       RobotContainer.intake.setIntakePower(-TeleopVariables.COLLECTION_SPEED, -TeleopVariables.COLLECTION_ROLLER_SPEED);
-    }else if(RobotContainer.GetOperatorRawAxis(USB.OPERATOR_L_TRIGGER) > 0.2){
+    }else if(RobotContainer.operatorController.getLeftBumper()){
       RobotContainer.intake.setIntakePower(TeleopVariables.COLLECTION_SPEED, TeleopVariables.COLLECTION_ROLLER_SPEED);
     }else{
       RobotContainer.intake.setIntakePower(0, 0);

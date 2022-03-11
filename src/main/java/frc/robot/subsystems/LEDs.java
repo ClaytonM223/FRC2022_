@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LEDs extends SubsystemBase {
   private final Spark LEDSpark = new Spark(1);
   /** Creates a new LEDs. */
-  public LEDs() {}
+  public LEDs() {
+  }
 
   public void setLED(double speed){
     LEDSpark.set(speed);
