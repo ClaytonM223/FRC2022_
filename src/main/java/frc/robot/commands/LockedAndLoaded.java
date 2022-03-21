@@ -9,6 +9,7 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.TeleopVariables;
@@ -40,6 +41,7 @@ public class LockedAndLoaded extends CommandBase {
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
     }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+      SmartDashboard.putBoolean("Ball", false);
       if(DriverStation.getAlliance() == Alliance.Blue){
         RobotContainer.leds.setLED(0.87);
       }else{
@@ -47,6 +49,7 @@ public class LockedAndLoaded extends CommandBase {
       }
     }else{
       RobotContainer.transfer.setTransferPower(0);
+      SmartDashboard.putBoolean("Ball", true);
       if(DriverStation.getAlliance() == Alliance.Blue){
         RobotContainer.leds.setLED(-0.09);
       }else if(DriverStation.getAlliance() == Alliance.Red){

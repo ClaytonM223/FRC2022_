@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   private static RobotContainer m_robotContainer;
 
   private static final PowerDistribution pdh = new PowerDistribution();
+  boolean alliance;
 
 
   /**
@@ -51,10 +53,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if(DriverStation.getAlliance() == Alliance.Blue){
+      alliance = true;
+    }else{
+      alliance = false;
+    }
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter Current", Shooter.shooter.getOutputCurrent());
-    
+    SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.get());
+    SmartDashboard.putBoolean("Alliance", alliance);
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
