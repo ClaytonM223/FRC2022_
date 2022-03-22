@@ -5,6 +5,7 @@
 package frc.robot;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     RobotContainer.leds.setLED(0.);
+    CameraServer.startAutomaticCapture(0);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -60,7 +62,6 @@ public class Robot extends TimedRobot {
     }
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
-    SmartDashboard.putNumber("Shooter Current", Shooter.shooter.getOutputCurrent());
     SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.get());
     SmartDashboard.putBoolean("Alliance", alliance);
     //Shuffelboard things
