@@ -91,7 +91,7 @@ public final class Constants {
     public final class AutoNumbers{
         public static final double DriveSpeed = 0.5;
         public static final double ShooterPower = 0.4;
-        public static final double DriveTime = 3.75;
+        public static final double DriveTime = 3.95;
         public static final double LaunchTime = 6;
     }
     public final static class HardwareNumbers{

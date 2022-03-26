@@ -31,16 +31,16 @@ public class YEET extends CommandBase {
       RobotContainer.shooter.setShooterPower(0.3);
     }
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Left){
-      RobotContainer.shooter.setShooterPower(0.4);
+      RobotContainer.shooter.setShooterPower(0.7);
     }
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
       RobotContainer.shooter.setShooterPower(0.5);
     }
     if (RobotContainer.operatorController.getAButton()){
-      RobotContainer.shooter.setShooterPower(0.6);
+      RobotContainer.shooter.setShooterPower(0.4);
     }
     if (RobotContainer.operatorController.getBButton()){
-      RobotContainer.shooter.setShooterPower(0.7);
+      RobotContainer.shooter.setShooterPower(0.6);
     }
     if (RobotContainer.operatorController.getYButton()){
       RobotContainer.shooter.setShooterPower(0);
