@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -13,6 +14,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.EncoderDrive;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
 
@@ -60,6 +63,8 @@ public class Robot extends TimedRobot {
     }else{
       alliance = false;
     }
+    RelativeEncoder encoder = RobotContainer.driveTrain.frontRight.getEncoder();
+    SmartDashboard.putNumber("Encoder?", encoder.getPosition());
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.getAppliedOutput());

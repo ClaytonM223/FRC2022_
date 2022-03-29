@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 
@@ -26,11 +27,10 @@ public class DriveTrain extends SubsystemBase {
     backLeft.restoreFactoryDefaults();
     frontRight.restoreFactoryDefaults();
     backRight.restoreFactoryDefaults();
-    frontRight.setInverted(true);
-    backRight.setInverted(true);
-
     backRight.follow(frontRight);
     backLeft.follow(frontLeft);
+    frontRight.setInverted(true);
+    backRight.setInverted(true);
 
     drive.feed();
   }

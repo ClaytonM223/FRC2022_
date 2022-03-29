@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.USB;
 import frc.robot.commands.AUTOBackUpShoot;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.EncoderDrive;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
 import frc.robot.commands.UpYaGo;
@@ -22,6 +23,8 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,6 +49,7 @@ public class RobotContainer {
 
 
   public static final AUTOBackUpShoot autoBackUpShoot = new AUTOBackUpShoot();
+  public static final EncoderDrive encoderDrive = new EncoderDrive(0);
 
   //Driver Controller
   public static final XboxController driverController = new XboxController(USB.DIRVER_CONTROLER_ID);
@@ -81,6 +85,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AUTOBackUpShoot();
+    return new SequentialCommandGroup(
+     new EncoderDrive(25),
+     new WaitCommand(2),
+     new EncoderDrive(25)
+    );
   }
 }

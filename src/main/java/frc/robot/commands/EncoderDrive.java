@@ -16,8 +16,9 @@ public class EncoderDrive extends CommandBase {
   double m_target;
   /** Creates a new EncoderDrive. */
   public EncoderDrive(double target) {
+    addRequirements(RobotContainer.driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
-    target = m_target;
+    m_target = target;
   }
 
   // Called when the command is initially scheduled.
@@ -38,8 +39,10 @@ public class EncoderDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_target > m_rightEncoder.getPosition() && m_target > m_leftEncoder.getPosition()){
-      RobotContainer.driveTrain.manualDrive(0.1, 0);
+    if(m_target > m_rightEncoder.getPosition()){
+      RobotContainer.driveTrain.manualDrive(-0.5, 0);
+    }else{
+      RobotContainer.driveTrain.manualDrive(0, 0);
     }
   }
 
