@@ -90,9 +90,10 @@ public final class Constants {
     }
     public final class AutoNumbers{
         public static final double DriveSpeed = 0.5;
-        public static final double ShooterPower = 0.4;
-        public static final double DriveTime = 3.95;
-        public static final double LaunchTime = 6;
+        public static final double ShooterPower = 0.23; //0.4
+        public static final double DriveTime = 6.95;    //3.95
+        public static final double LaunchTime = 3;      //6
+        public static final double WaitTime = 5;        //2
     }
     public final static class HardwareNumbers{
         public static final double GearRatio = 10.71;

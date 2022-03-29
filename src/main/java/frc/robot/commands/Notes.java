@@ -109,4 +109,26 @@ Value              Type                  Style                                  
  0.99       Solid Colors                                                    Black 
 
 
+
+ Top Goal Auto
+     RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
+    if ((m_timer.get() < TargetTime) && (m_timer.get() > 2)){
+      RobotContainer.driveTrain.manualDrive(0.5, 0);
+    }else{
+      RobotContainer.driveTrain.manualDrive(0, 0);
+    }
+
+    if (m_timer.get() >= AutoNumbers.LaunchTime){
+      RobotContainer.transfer.setTransferPower(1);
+    }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
+      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+    }else{
+      RobotContainer.transfer.setTransferPower(0);
+    }
+
+
+    if (m_timer.get() > 10){
+      RobotContainer.transfer.setTransferPower(0);
+    }
+
 */

@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
     }
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
-    SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.get());
+    SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.getAppliedOutput());
     SmartDashboard.putBoolean("Alliance", alliance);
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
