@@ -61,7 +61,9 @@ public class LockedAndLoaded extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.transfer.setTransferPower(0);
+  }
 
   // Returns true when the command should end.
   @Override

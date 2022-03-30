@@ -14,8 +14,7 @@ public class DriveTrain extends SubsystemBase {
   public CANSparkMax backRight = new CANSparkMax(CANID.RIGHT_BACK_ID , MotorType.kBrushless);
   public CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
   public CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
-
-  public DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
+  public DifferentialDrive drive = new DifferentialDrive(backLeft, frontRight);
 
 
 
@@ -27,7 +26,7 @@ public class DriveTrain extends SubsystemBase {
     frontRight.restoreFactoryDefaults();
     backRight.restoreFactoryDefaults();
 
-    backLeft.follow(frontLeft);
+    frontLeft.follow(backLeft);
     backRight.follow(frontRight);
 
     frontRight.setInverted(true);
@@ -36,7 +35,7 @@ public class DriveTrain extends SubsystemBase {
     drive.feed();
   }
   public void manualDrive(double Move, double Turn){
-    drive.arcadeDrive(-Move, Turn);
+    drive.arcadeDrive(Move, Turn);
     if (Math.abs(Move) < 0.05){
       Move = 0;
     }
@@ -44,6 +43,7 @@ public class DriveTrain extends SubsystemBase {
       Turn = 0;
     }
     drive.feed();
+
   } 
   @Override
   public void periodic() {

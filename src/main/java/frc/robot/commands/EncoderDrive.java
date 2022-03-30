@@ -6,61 +6,55 @@ package frc.robot.commands;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class EncoderDrive extends CommandBase {
   public RelativeEncoder m_rightEncoder;
-  public RelativeEncoder m_leftEncoder;
   double m_target;
+  double m_speed;
   /** Creates a new EncoderDrive. */
-  public EncoderDrive(double target) {
+  public EncoderDrive(double target, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_target = target;
+    m_speed = speed;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_rightEncoder = RobotContainer.driveTrain.frontRight.getEncoder();
-    m_leftEncoder = RobotContainer.driveTrain.frontLeft.getEncoder();
     m_rightEncoder.setPosition(0);
-    m_leftEncoder.setPosition(0);
     RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
-    RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
-    RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_target > m_rightEncoder.getPosition()){
-      RobotContainer.driveTrain.frontRight.set(0.3);
-      RobotContainer.driveTrain.drive.feed();
+    if(Math.abs(m_target) < Math.abs(m_rightEncoder.getPosition())){
+      RobotContainer.driveTrain.manualDrive(0, 0);
     }else{
-      RobotContainer.driveTrain.frontRight.set(0);
-      RobotContainer.driveTrain.drive.feed();
-    }
-    if(m_target > m_leftEncoder.getPosition()){
-      RobotContainer.driveTrain.frontLeft.set(0.3);
-      RobotContainer.driveTrain.drive.feed();
-    }else{
-      RobotContainer.driveTrain.frontLeft.set(0);
-      RobotContainer.driveTrain.drive.feed();
+      RobotContainer.driveTrain.manualDrive(m_speed, 0);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.driveTrain.manualDrive(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(Math.abs(m_target) < Math.abs(m_rightEncoder.getPosition())){
+      RobotContainer.driveTrain.manualDrive(0, 0);
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    RobotContainer.driveTrain.drive.feed();
   }
 
     // For every pixel
@@ -100,7 +99,6 @@ public class Robot extends TimedRobot {
     RobotContainer.leds.setLED(0.77);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    RobotContainer.transfer.setTransferPower(0);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
