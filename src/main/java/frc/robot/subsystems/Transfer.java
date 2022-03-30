@@ -22,6 +22,7 @@ public class Transfer extends SubsystemBase {
 
   @Override
   public void periodic() {
+    transfer.feed();
     // This method will be called once per scheduler run
   }
 }

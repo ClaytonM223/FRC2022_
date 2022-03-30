@@ -14,8 +14,6 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.EncoderDrive;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 
 
@@ -75,6 +73,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    RobotContainer.driveTrain.drive.feed();
   }
 
     // For every pixel
@@ -101,6 +100,7 @@ public class Robot extends TimedRobot {
     RobotContainer.leds.setLED(0.77);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    RobotContainer.transfer.setTransferPower(0);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

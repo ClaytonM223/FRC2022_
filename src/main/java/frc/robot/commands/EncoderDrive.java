@@ -16,7 +16,6 @@ public class EncoderDrive extends CommandBase {
   double m_target;
   /** Creates a new EncoderDrive. */
   public EncoderDrive(double target) {
-    addRequirements(RobotContainer.driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
     m_target = target;
   }
@@ -29,8 +28,8 @@ public class EncoderDrive extends CommandBase {
     m_rightEncoder.setPosition(0);
     m_leftEncoder.setPosition(0);
     RobotContainer.driveTrain.frontLeft.setIdleMode(IdleMode.kBrake);
-    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.frontLeft.setClosedLoopRampRate(2);
     RobotContainer.driveTrain.frontRight.setClosedLoopRampRate(2);
@@ -40,9 +39,18 @@ public class EncoderDrive extends CommandBase {
   @Override
   public void execute() {
     if(m_target > m_rightEncoder.getPosition()){
-      RobotContainer.driveTrain.manualDrive(-0.5, 0);
+      RobotContainer.driveTrain.frontRight.set(0.3);
+      RobotContainer.driveTrain.drive.feed();
     }else{
-      RobotContainer.driveTrain.manualDrive(0, 0);
+      RobotContainer.driveTrain.frontRight.set(0);
+      RobotContainer.driveTrain.drive.feed();
+    }
+    if(m_target > m_leftEncoder.getPosition()){
+      RobotContainer.driveTrain.frontLeft.set(0.3);
+      RobotContainer.driveTrain.drive.feed();
+    }else{
+      RobotContainer.driveTrain.frontLeft.set(0);
+      RobotContainer.driveTrain.drive.feed();
     }
   }
 
