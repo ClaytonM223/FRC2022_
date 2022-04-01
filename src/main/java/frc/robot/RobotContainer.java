@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.USB;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.EncoderDrive;
+import frc.robot.commands.ItsHammerTime;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
 import frc.robot.commands.UpYaGo;
@@ -17,6 +18,7 @@ import frc.robot.commands.YEET;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeLift;
 import frc.robot.subsystems.LEDs;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
@@ -39,12 +41,14 @@ public class RobotContainer {
   public static final Shooter shooter = new Shooter();
   public static final Lift lift = new Lift();
   public static final LEDs leds = new LEDs();
+  public static final IntakeLift ILift = new IntakeLift();
 
   public static final ArcadeDrive arcadeDrive = new ArcadeDrive();
   public static final NomNom nomnom = new NomNom();
   public static final LockedAndLoaded lockedAndLoaded = new LockedAndLoaded();
   public static final YEET yeet = new YEET();
   public static final UpYaGo upYaGo = new UpYaGo();
+  public static final ItsHammerTime hammer = new ItsHammerTime();
 
   public static final EncoderDrive encoderDrive = new EncoderDrive(0, 0);
 

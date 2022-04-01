@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
 
   private static final PowerDistribution pdh = new PowerDistribution();
   boolean alliance;
+  public RelativeEncoder shooterRPM = Shooter.shooter.getEncoder();
 
 
   /**
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     RobotContainer.leds.setLED(0.);
     CameraServer.startAutomaticCapture(0);
+    shooterRPM.setVelocityConversionFactor(1.93);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -60,12 +62,10 @@ public class Robot extends TimedRobot {
       alliance = true;
     }else{
       alliance = false;
-    }
-    RelativeEncoder encoder = RobotContainer.driveTrain.frontRight.getEncoder();
-    SmartDashboard.putNumber("Encoder?", encoder.getPosition());
+    } 
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
-    SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.getAppliedOutput());
+    SmartDashboard.putNumber("Shooter RPM",shooterRPM.getVelocity());
     SmartDashboard.putBoolean("Alliance", alliance);
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
+    RobotContainer.ILift.actuateSolenoid(null);
   }
 
   @Override
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot {
     RobotContainer.lockedAndLoaded.schedule();
     RobotContainer.yeet.schedule();
     RobotContainer.upYaGo.schedule();
+    RobotContainer.hammer.schedule();
   }
 
   @Override

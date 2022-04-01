@@ -99,5 +99,7 @@ public final class Constants {
         public static final double GearRatio = 10.71;
         public final static double WheelDiameter = Units.inchesToMeters(6);
         public static final int NumberOfLEDs = 213;
+        public static final int ArmForward = 0;
+        public static final int ArmBackward = 1;
     } 
 }
