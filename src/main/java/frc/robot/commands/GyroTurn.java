@@ -7,6 +7,7 @@ package frc.robot.commands;
 import com.ctre.phoenix.sensors.Pigeon2;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.CANID;
 
 public class GyroTurn extends CommandBase {
@@ -17,6 +18,8 @@ public class GyroTurn extends CommandBase {
   double m_angle;
   double m_speed;
   public GyroTurn(double angle, double speed) {
+    m_speed = speed;
+    m_angle = angle;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,7 +31,13 @@ public class GyroTurn extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (Math.abs(m_angle) < Math.abs(pigeon.getYaw())){
+      RobotContainer.driveTrain.manualDrive(0, m_speed);
+    }else{
+      RobotContainer.driveTrain.manualDrive(0, 0);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -37,6 +46,11 @@ public class GyroTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(Math.abs(m_angle) < Math.abs(pigeon.getYaw())){
+      RobotContainer.driveTrain.manualDrive(0, 0);
+      return true;
+    }else{
+      return false;
+    }
   }
 }
