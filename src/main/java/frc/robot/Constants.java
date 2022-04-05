@@ -52,6 +52,8 @@ public final class Constants {
         public static final int OPERATOR_START_ID = 8;
    }
     public final class CANID{
+        //Pigeon 2.0
+        public static final int PIGEON_ID = 0;
         //PDH
         public static final int PDH_ID = 1;
         //DriveTrain
