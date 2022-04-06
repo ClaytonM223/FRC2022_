@@ -15,9 +15,6 @@ public class DriveTrain extends SubsystemBase {
   public CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
   public CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
   public DifferentialDrive drive = new DifferentialDrive(backLeft, frontRight);
-
-
-
   /** Creates a new DriveTrain. */
   public DriveTrain() {
 

@@ -7,6 +7,7 @@ package frc.robot.commands;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.TeleopVariables;
@@ -32,6 +33,10 @@ public class AutoTransfer extends CommandBase {
   public void execute() {
     if (m_o == true){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+      Timer.delay(0.25);
+      RobotContainer.transfer.setTransferPower(0);
+      Timer.delay(1.5);
+      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);   
     }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
     }else{

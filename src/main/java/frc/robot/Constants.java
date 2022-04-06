@@ -96,6 +96,7 @@ public final class Constants {
         public static final double DriveTime = 6.95;    //3.95
         public static final double LaunchTime = 3;      //6
         public static final double WaitTime = 5;        //2
+        public static final double IntakeRollerSpeed = 0.3;
     }
     public final static class HardwareNumbers{
         public static final double GearRatio = 10.71;

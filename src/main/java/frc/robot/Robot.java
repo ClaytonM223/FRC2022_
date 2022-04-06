@@ -9,6 +9,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter RPM",shooterRPM.getVelocity());
     SmartDashboard.putBoolean("Alliance", alliance);
+    RobotContainer.driveTrain.drive.feed();
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
@@ -86,12 +88,10 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
-    RobotContainer.ILift.arm.set(Value.kOff);
   }
 
   @Override
   public void disabledPeriodic() {
-
     Shooter.shooter.clearFaults();
   }
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -141,6 +141,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
+    RobotContainer.ILift.actuateSolenoid(true);
+    Timer.delay(3);
+    RobotContainer.ILift.arm.set(Value.kOff);
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
   }

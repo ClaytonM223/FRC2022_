@@ -4,11 +4,9 @@
 
 package frc.robot.commands;
 
-import javax.management.ConstructorParameters;
-
 import com.ctre.phoenix.sensors.Pigeon2;
-import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.CANID;
@@ -16,6 +14,7 @@ import frc.robot.Constants.CANID;
 
 
 public class GyroTurn extends CommandBase {
+
   private static final Pigeon2 pigeon = new Pigeon2(CANID.PIGEON_ID);
   /** Creates a new GyroTurn.*/
   //Counter Clockwise is positive
@@ -35,13 +34,15 @@ public class GyroTurn extends CommandBase {
   @Override
   public void initialize() {
     pigeon.setYaw(0);
+    Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(m_angle) < Math.abs(pigeon.getYaw())){
-      RobotContainer.driveTrain.manualDrive(0, m_speed);
+    double error = pigeon.getYaw();
+    if (Math.abs(m_angle) > Math.abs(error)){
+      RobotContainer.driveTrain.drive.arcadeDrive(0, m_speed);
     }else{
       RobotContainer.driveTrain.manualDrive(0, 0);
     }
@@ -54,11 +55,11 @@ public class GyroTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(m_angle) < Math.abs(pigeon.getYaw())){
+    if(Math.abs(m_angle) > Math.abs(pigeon.getYaw())){
+      return false;
+    }else{
       RobotContainer.driveTrain.manualDrive(0, 0);
       return true;
-    }else{
-      return false;
     }
   }
 }

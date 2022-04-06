@@ -6,11 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeLift;
+import frc.robot.Constants.AutoNumbers;
+import frc.robot.Constants.TeleopVariables;
 
-public class Expiramental extends CommandBase {
-  /** Creates a new Expiramental. */
-  public Expiramental() {
+public class AutoCollect extends CommandBase {
+  /** Creates a new AutoCollect. */
+  boolean running;
+
+  public AutoCollect(boolean run) {
+    running = run;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,7 +25,11 @@ public class Expiramental extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.ILift.actuateSolenoid(false);
+    if (running == true){
+      RobotContainer.intake.setIntakePower(TeleopVariables.COLLECTION_SPEED, AutoNumbers.IntakeRollerSpeed);
+    }else{
+      RobotContainer.intake.setIntakePower(0, 0);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -31,6 +39,12 @@ public class Expiramental extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
+    //if(running == false){
+    //  RobotContainer.intake.setIntakePower(0, 0);
+    //  return true;
+    //}else{
+    //  return false;
+    //}
   }
 }

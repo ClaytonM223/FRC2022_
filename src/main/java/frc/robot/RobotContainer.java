@@ -5,10 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.Constants.USB;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoArm;
+import frc.robot.commands.AutoCollect;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTransfer;
 import frc.robot.commands.EncoderDrive;
 import frc.robot.commands.GyroTurn;
@@ -26,6 +30,7 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -51,10 +56,13 @@ public class RobotContainer {
   public static final YEET yeet = new YEET();
   public static final UpYaGo upYaGo = new UpYaGo();
   public static final ItsHammerTime hammer = new ItsHammerTime();
+
   public static final AutoTransfer autoTransfer = new AutoTransfer(false);
   public static final GyroTurn gyroTurn = new GyroTurn(0, 0);
-
   public static final EncoderDrive encoderDrive = new EncoderDrive(0, 0);
+  public static final AutoShoot autoShoot = new AutoShoot(false);
+  public static final AutoCollect autoCollect = new AutoCollect(false);
+  public static final AutoArm autoArm = new AutoArm(false);
 
   //Driver Controller
   public static final XboxController driverController = new XboxController(USB.DIRVER_CONTROLER_ID);
@@ -90,12 +98,22 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new SequentialCommandGroup(
-    new EncoderDrive(25, 0.25),
-    new WaitCommand(2),
-    new GyroTurn(180, 0.35),
-    new WaitCommand(2),
-    new EncoderDrive(25, 0.25)
+    return 
+    new ParallelCommandGroup(
+      new AutoTransfer(false),
+      new AutoShoot(true),
+      new SequentialCommandGroup(
+        new AutoArm(false),
+        new AutoCollect(true),
+        new EncoderDrive(30, 0.4),
+        new WaitCommand(2),
+        new AutoCollect(false),
+        new AutoArm(true),
+        new GyroTurn(180, 0.4),
+        new WaitCommand(2),
+        new EncoderDrive(30, 0.35),
+        new AutoTransfer(true)
+        )
     );
   }
 }
