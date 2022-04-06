@@ -9,6 +9,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -85,6 +86,7 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
+    RobotContainer.ILift.arm.set(Value.kOff);
   }
 
   @Override

@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.HardwareNumbers;
 
 public class IntakeLift extends SubsystemBase {
-  private final DoubleSolenoid arm = new DoubleSolenoid(PneumaticsModuleType.REVPH, HardwareNumbers.ArmForward, HardwareNumbers.ArmBackward);
-  /** Creates a new IntakeLift. */
+  public final DoubleSolenoid arm = new DoubleSolenoid(PneumaticsModuleType.REVPH, HardwareNumbers.ArmForward, HardwareNumbers.ArmBackward);
+  /** Creates a new IntakeLift.*/
   public IntakeLift() {}
 
+  /**true is up, false is down */
   public void actuateSolenoid(Boolean state){
     if(state == true){
       arm.set(DoubleSolenoid.Value.kForward);

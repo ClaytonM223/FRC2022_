@@ -34,6 +34,11 @@ public class DriveTrain extends SubsystemBase {
 
     drive.feed();
   }
+  /**
+   * An arcade method of motion control
+   * @param Move Speed to move at
+   * @param Turn Ammount of turn 
+   */
   public void manualDrive(double Move, double Turn){
     drive.arcadeDrive(Move, Turn);
     if (Math.abs(Move) < 0.05){

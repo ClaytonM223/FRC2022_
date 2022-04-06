@@ -4,20 +4,28 @@
 
 package frc.robot.commands;
 
+import javax.management.ConstructorParameters;
+
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.CANID;
 
+
+
 public class GyroTurn extends CommandBase {
   private static final Pigeon2 pigeon = new Pigeon2(CANID.PIGEON_ID);
-  /** Creates a new GyroTurn. */
-
+  /** Creates a new GyroTurn.*/
   //Counter Clockwise is positive
   double m_angle;
   double m_speed;
-  public GyroTurn(double angle, double speed) {
+  /**Turns the robot to face input angle
+   * @param angle target angle to go to
+   * @param speed setting this to a positive will have the robot go counterclockwise to reach the target. Use a negative to go clockwise
+   */
+  public GyroTurn(double angle , double speed) {
     m_speed = speed;
     m_angle = angle;
     // Use addRequirements() here to declare subsystem dependencies.

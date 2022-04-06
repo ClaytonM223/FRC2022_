@@ -4,34 +4,38 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.TeleopVariables;
 
-public class ItsHammerTime extends CommandBase {
-  /** Creates a new ItsHammerTime. */
-  public ItsHammerTime() {
+public class AutoTransfer extends CommandBase {
+  private final I2C.Port i2c = I2C.Port.kOnboard;
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2c);
+  /** Creates a new AutoTransfer. */
+  boolean m_o;
+  public AutoTransfer(boolean override) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_o = override;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.transfer.setTransferPower(0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Up){
-      RobotContainer.ILift.actuateSolenoid(true);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
-    }
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
-      RobotContainer.ILift.actuateSolenoid(false);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
+    if (m_o == true){
+      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+    }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
+      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+    }else{
+      RobotContainer.transfer.setTransferPower(0); 
     }
   }
 

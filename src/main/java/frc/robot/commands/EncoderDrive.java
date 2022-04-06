@@ -14,6 +14,11 @@ public class EncoderDrive extends CommandBase {
   double m_target;
   double m_speed;
   /** Creates a new EncoderDrive. */
+
+  /**Drives to a target number of rotations. Use speed to change direction not target
+   * @param target Number of wheel rotations to go to
+   * @param speed positive is forward, negaitive is backward
+   */
   public EncoderDrive(double target, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_target = target;

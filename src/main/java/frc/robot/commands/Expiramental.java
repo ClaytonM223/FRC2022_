@@ -4,15 +4,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.TeleopVariables;
+import frc.robot.subsystems.IntakeLift;
 
-public class ItsHammerTime extends CommandBase {
-  /** Creates a new ItsHammerTime. */
-  public ItsHammerTime() {
+public class Expiramental extends CommandBase {
+  /** Creates a new Expiramental. */
+  public Expiramental() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,16 +21,7 @@ public class ItsHammerTime extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Up){
-      RobotContainer.ILift.actuateSolenoid(true);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
-    }
-    if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
-      RobotContainer.ILift.actuateSolenoid(false);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
-    }
+    RobotContainer.ILift.actuateSolenoid(false);
   }
 
   // Called once the command ends or is interrupted.

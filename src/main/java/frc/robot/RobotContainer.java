@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.Constants.USB;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoTransfer;
 import frc.robot.commands.EncoderDrive;
+import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ItsHammerTime;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
@@ -49,6 +51,8 @@ public class RobotContainer {
   public static final YEET yeet = new YEET();
   public static final UpYaGo upYaGo = new UpYaGo();
   public static final ItsHammerTime hammer = new ItsHammerTime();
+  public static final AutoTransfer autoTransfer = new AutoTransfer(false);
+  public static final GyroTurn gyroTurn = new GyroTurn(0, 0);
 
   public static final EncoderDrive encoderDrive = new EncoderDrive(0, 0);
 
@@ -87,9 +91,11 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return new SequentialCommandGroup(
-    new EncoderDrive(25, 0.5),
+    new EncoderDrive(25, 0.25),
     new WaitCommand(2),
-    new EncoderDrive(-25, -0.25)
+    new GyroTurn(180, 0.35),
+    new WaitCommand(2),
+    new EncoderDrive(25, 0.25)
     );
   }
 }
