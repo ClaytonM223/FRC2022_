@@ -34,7 +34,6 @@ public class GyroTurn extends CommandBase {
   @Override
   public void initialize() {
     pigeon.setYaw(0);
-    Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

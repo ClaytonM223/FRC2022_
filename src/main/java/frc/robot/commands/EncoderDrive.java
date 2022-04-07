@@ -34,6 +34,7 @@ public class EncoderDrive extends CommandBase {
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kBrake);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kBrake);
+    RobotContainer.driveTrain.drive.feed();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,12 +45,14 @@ public class EncoderDrive extends CommandBase {
     }else{
       RobotContainer.driveTrain.manualDrive(m_speed, 0);
     }
+    RobotContainer.driveTrain.drive.feed();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.driveTrain.manualDrive(0, 0);
+    RobotContainer.driveTrain.manualDrive(0, 0); 
+    RobotContainer.driveTrain.drive.feed();
   }
 
   // Returns true when the command should end.
@@ -57,8 +60,10 @@ public class EncoderDrive extends CommandBase {
   public boolean isFinished() {
     if(Math.abs(m_target) < Math.abs(m_rightEncoder.getPosition())){
       RobotContainer.driveTrain.manualDrive(0, 0);
+      RobotContainer.driveTrain.drive.feed();
       return true;
     }else{
+      RobotContainer.driveTrain.drive.feed();
       return false;
     }
   }

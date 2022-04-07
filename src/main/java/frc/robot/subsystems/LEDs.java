@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 
 public class LEDs extends SubsystemBase {
   private final Spark LEDSpark = new Spark(1);
@@ -23,6 +24,7 @@ public class LEDs extends SubsystemBase {
 
   @Override
   public void periodic() {
+    RobotContainer.driveTrain.drive.feed();
     // This method will be called once per scheduler run
   }
 }

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.Constants.USB;
+import frc.robot.commands.AUTOBackUpShoot;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoArm;
 import frc.robot.commands.AutoCollect;
@@ -96,8 +97,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
+  public Command get2BallAuto(){
     return 
     new ParallelCommandGroup(
       new AutoTransfer(false),
@@ -105,15 +105,22 @@ public class RobotContainer {
       new SequentialCommandGroup(
         new AutoArm(false),
         new AutoCollect(true),
-        new EncoderDrive(30, 0.4),
-        new WaitCommand(2),
-        new AutoCollect(false),
+        new EncoderDrive(25, 0.7),
+        new WaitCommand(0.7),
         new AutoArm(true),
-        new GyroTurn(180, 0.4),
-        new WaitCommand(2),
-        new EncoderDrive(30, 0.35),
+        new WaitCommand(0.5),
+        new GyroTurn(140, 0.8),
+        new WaitCommand(0.5),
+        new EncoderDrive(24, 0.7),
         new AutoTransfer(true)
         )
     );
+  }
+  public Command get1BallAuto(){
+    return new AUTOBackUpShoot();
+  }
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return null;
   }
 }

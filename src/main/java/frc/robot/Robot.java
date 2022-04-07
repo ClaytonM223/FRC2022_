@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,6 +27,8 @@ import frc.robot.subsystems.Shooter;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command m_2BallAuto;
+  private Command m_1BallAuto;
 
   private static RobotContainer m_robotContainer;
 
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotContainer.driveTrain.drive.feed();
     RobotContainer.leds.setLED(0.);
     CameraServer.startAutomaticCapture(0);
     shooterRPM.setVelocityConversionFactor(1.93);
@@ -59,11 +61,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if(DriverStation.getAlliance() == Alliance.Blue){
-      alliance = true;
-    }else{
-      alliance = false;
-    } 
+    RobotContainer.driveTrain.drive.feed();
+
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter RPM",shooterRPM.getVelocity());
@@ -88,15 +87,18 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
   public void disabledPeriodic() {
+    RobotContainer.driveTrain.drive.feed();
     Shooter.shooter.clearFaults();
   }
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    RobotContainer.driveTrain.drive.feed();
     RobotContainer.leds.setLED(0.77);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -109,7 +111,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
@@ -119,6 +121,7 @@ public class Robot extends TimedRobot {
     }else{
       RobotContainer.leds.setLED(0.61); 
     }
+    RobotContainer.driveTrain.drive.feed();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -137,6 +140,7 @@ public class Robot extends TimedRobot {
     RobotContainer.yeet.schedule();
     RobotContainer.upYaGo.schedule();
     RobotContainer.hammer.schedule();
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
@@ -150,7 +154,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    RobotContainer.driveTrain.drive.feed();
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override

@@ -25,13 +25,9 @@ public class ItsHammerTime extends CommandBase {
   public void execute() {
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Up){
       RobotContainer.ILift.actuateSolenoid(true);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
     }
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
       RobotContainer.ILift.actuateSolenoid(false);
-      Timer.delay(3);
-      RobotContainer.ILift.arm.set(Value.kOff);
     }
   }
 

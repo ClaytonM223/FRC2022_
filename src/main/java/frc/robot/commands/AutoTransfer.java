@@ -33,9 +33,9 @@ public class AutoTransfer extends CommandBase {
   public void execute() {
     if (m_o == true){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
-      Timer.delay(0.25);
+      Timer.delay(0.35);
       RobotContainer.transfer.setTransferPower(0);
-      Timer.delay(1.5);
+      Timer.delay(0.4);
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);   
     }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
