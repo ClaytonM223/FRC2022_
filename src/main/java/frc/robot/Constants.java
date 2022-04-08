@@ -97,6 +97,8 @@ public final class Constants {
         public static final double LaunchTime = 3;      //6
         public static final double WaitTime = 5;        //2
         public static final double IntakeRollerSpeed = 0.35;
+        public static final double MOVESPEED = 0.75;
+        public static final double MOVEDISTANCE = 40;
     }
     public final static class HardwareNumbers{
         public static final double GearRatio = 10.71;

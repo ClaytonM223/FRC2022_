@@ -5,9 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.USB;
 import frc.robot.commands.AUTOBackUpShoot;
 import frc.robot.commands.ArcadeDrive;
@@ -20,6 +20,7 @@ import frc.robot.commands.GyroTurn;
 import frc.robot.commands.ItsHammerTime;
 import frc.robot.commands.LockedAndLoaded;
 import frc.robot.commands.NomNom;
+import frc.robot.commands.TwoBallAuto;
 import frc.robot.commands.UpYaGo;
 import frc.robot.commands.YEET;
 
@@ -31,9 +32,6 @@ import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transfer;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -64,6 +62,8 @@ public class RobotContainer {
   public static final AutoShoot autoShoot = new AutoShoot(false);
   public static final AutoCollect autoCollect = new AutoCollect(false);
   public static final AutoArm autoArm = new AutoArm(false);
+  public static final TwoBallAuto twoBallAuto = new TwoBallAuto();
+  public static final AUTOBackUpShoot autoBackUpShoot = new AUTOBackUpShoot();
 
   //Driver Controller
   public static final XboxController driverController = new XboxController(USB.DIRVER_CONTROLER_ID);
@@ -78,9 +78,16 @@ public class RobotContainer {
     return operatorController.getRawAxis(axis);
   }
 
+  SendableChooser<Command> chooser = new SendableChooser<>();
+
+  
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    chooser.setDefaultOption("2 Ball Auto", twoBallAuto);
+    chooser.addOption("1 Ball Auto", autoBackUpShoot);
     // Configure the button bindings
+    Shuffleboard.getTab("SmartDashboard").add(chooser);
     configureButtonBindings();
   }
 
@@ -90,37 +97,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  public Command get2BallAuto(){
-    return 
-    new ParallelCommandGroup(
-      new AutoTransfer(false),
-      new AutoShoot(true),
-      new SequentialCommandGroup(
-        new AutoArm(false),
-        new AutoCollect(true),
-        new EncoderDrive(25, 0.7),
-        new WaitCommand(0.7),
-        new AutoArm(true),
-        new WaitCommand(0.5),
-        new GyroTurn(140, 0.8),
-        new WaitCommand(0.5),
-        new EncoderDrive(24, 0.7),
-        new AutoTransfer(true)
-        )
-    );
-  }
-  public Command get1BallAuto(){
-    return new AUTOBackUpShoot();
-  }
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return chooser.getSelected();
   }
 }

@@ -27,14 +27,13 @@ import frc.robot.subsystems.Shooter;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private Command m_2BallAuto;
-  private Command m_1BallAuto;
 
   private static RobotContainer m_robotContainer;
 
   private static final PowerDistribution pdh = new PowerDistribution();
   boolean alliance;
   public RelativeEncoder shooterRPM = Shooter.shooter.getEncoder();
+
 
 
   /**
