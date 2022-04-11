@@ -35,8 +35,9 @@ public class AutoTransfer extends CommandBase {
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
       Timer.delay(0.35);
       RobotContainer.transfer.setTransferPower(0);
-      Timer.delay(0.4);
-      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);   
+      Timer.delay(0.6);
+      RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
+      Timer.delay(1);   
     }else if (m_colorSensor.getProximity() < TeleopVariables.PROXIMITY){
       RobotContainer.transfer.setTransferPower(TeleopVariables.TRANSFER_SPEED);
     }else{

@@ -27,6 +27,12 @@ public class ItsHammerTime extends CommandBase {
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Down){
       RobotContainer.ILift.actuateSolenoid(false);
     }
+    if (RobotContainer.driverController.getPOV() == TeleopVariables.D_Pad_Up){
+      RobotContainer.ILift.actuateSolenoid(true);
+    }
+    if (RobotContainer.driverController.getPOV() == TeleopVariables.D_Pad_Down){
+      RobotContainer.ILift.actuateSolenoid(false);
+    }
   }
 
   // Called once the command ends or is interrupted.

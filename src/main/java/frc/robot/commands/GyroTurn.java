@@ -13,7 +13,7 @@ import frc.robot.Constants.CANID;
 
 public class GyroTurn extends CommandBase {
 
-  private static final Pigeon2 pigeon = new Pigeon2(CANID.PIGEON_ID);
+  public final Pigeon2 pigeon = new Pigeon2(CANID.PIGEON_ID);
   /** Creates a new GyroTurn.*/
   //Counter Clockwise is positive
   double m_angle;
@@ -31,7 +31,6 @@ public class GyroTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pigeon.setYaw(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -50,7 +50,7 @@ public class AUTOBackUpShoot extends CommandBase {
         
     RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
     if ((m_timer.get() < TargetTime) && (m_timer.get() > AutoNumbers.WaitTime)){
-      RobotContainer.driveTrain.manualDrive(0.5, 0);
+      RobotContainer.driveTrain.manualDrive(-0.5, 0);
     }else{
       RobotContainer.driveTrain.manualDrive(0, 0);
     }
@@ -66,6 +66,7 @@ public class AUTOBackUpShoot extends CommandBase {
 
     if (m_timer.get() > 10){
       RobotContainer.transfer.setTransferPower(0);
+      RobotContainer.shooter.setShooterPower(0);
     }
 
     
