@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.CANID;
 
 public class Transfer extends SubsystemBase {
@@ -22,6 +23,8 @@ public class Transfer extends SubsystemBase {
 
   @Override
   public void periodic() {
+    transfer.feed();
+    RobotContainer.driveTrain.drive.feed();
     // This method will be called once per scheduler run
   }
 }

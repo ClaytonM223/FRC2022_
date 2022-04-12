@@ -52,6 +52,8 @@ public final class Constants {
         public static final int OPERATOR_START_ID = 8;
    }
     public final class CANID{
+        //Pigeon 2.0
+        public static final int PIGEON_ID = 0;
         //PDH
         public static final int PDH_ID = 1;
         //DriveTrain
@@ -94,10 +96,15 @@ public final class Constants {
         public static final double DriveTime = 6.95;    //3.95
         public static final double LaunchTime = 3;      //6
         public static final double WaitTime = 5;        //2
+        public static final double IntakeRollerSpeed = 0.35;
+        public static final double MOVESPEED = 0.75;
+        public static final double MOVEDISTANCE = 40;
     }
     public final static class HardwareNumbers{
         public static final double GearRatio = 10.71;
         public final static double WheelDiameter = Units.inchesToMeters(6);
         public static final int NumberOfLEDs = 213;
+        public static final int ArmForward = 0;
+        public static final int ArmBackward = 1;
     } 
 }

@@ -6,30 +6,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.AutoNumbers;
 
-public class YEET extends CommandBase {
-  /** Creates a new YEET. */
-  public YEET() {
-    addRequirements(RobotContainer.shooter);
+public class AutoShoot extends CommandBase {
+  /** Creates a new AutoShoot. */
+  boolean launch;
+  public AutoShoot(boolean yeet) {
+    launch = yeet;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.shooter.setShooterPower(0);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.operatorController.getAButton()){
-      RobotContainer.shooter.setShooterPower(0.22);
-    }
-    if (RobotContainer.operatorController.getBButton()){
-      RobotContainer.shooter.setShooterPower(0.4);
-    }
-    if (RobotContainer.operatorController.getYButton()){
+    if (launch == true){
+      RobotContainer.shooter.setShooterPower(AutoNumbers.ShooterPower);
+    }else{
       RobotContainer.shooter.setShooterPower(0);
     }
   }

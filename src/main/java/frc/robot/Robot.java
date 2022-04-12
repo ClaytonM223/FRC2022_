@@ -3,13 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -31,6 +30,8 @@ public class Robot extends TimedRobot {
 
   private static final PowerDistribution pdh = new PowerDistribution();
   boolean alliance;
+  public RelativeEncoder shooterRPM = Shooter.shooter.getEncoder();
+
 
 
   /**
@@ -39,8 +40,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotContainer.driveTrain.drive.feed();
     RobotContainer.leds.setLED(0.);
     CameraServer.startAutomaticCapture(0);
+    shooterRPM.setVelocityConversionFactor(1.93);
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -55,15 +58,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if(DriverStation.getAlliance() == Alliance.Blue){
-      alliance = true;
-    }else{
-      alliance = false;
-    }
+    RobotContainer.driveTrain.drive.feed();
+    SmartDashboard.putNumber("angle", RobotContainer.gyroTurn.pigeon.getYaw());
     SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
     SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
-    SmartDashboard.putNumber("Shooter Voltage",Shooter.shooter.getAppliedOutput());
+    SmartDashboard.putNumber("Shooter RPM",shooterRPM.getVelocity());
     SmartDashboard.putBoolean("Alliance", alliance);
+    RobotContainer.driveTrain.drive.feed();
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
@@ -83,16 +84,19 @@ public class Robot extends TimedRobot {
     RobotContainer.driveTrain.frontRight.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backLeft.setIdleMode(IdleMode.kCoast);
     RobotContainer.driveTrain.backRight.setIdleMode(IdleMode.kCoast);
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
   public void disabledPeriodic() {
-
+    RobotContainer.driveTrain.drive.feed();
     Shooter.shooter.clearFaults();
   }
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    RobotContainer.driveTrain.drive.feed();
+    RobotContainer.gyroTurn.pigeon.setYaw(0);
     RobotContainer.leds.setLED(0.77);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -105,7 +109,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
@@ -115,6 +119,7 @@ public class Robot extends TimedRobot {
     }else{
       RobotContainer.leds.setLED(0.61); 
     }
+    RobotContainer.driveTrain.drive.feed();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -132,17 +137,23 @@ public class Robot extends TimedRobot {
     RobotContainer.lockedAndLoaded.schedule();
     RobotContainer.yeet.schedule();
     RobotContainer.upYaGo.schedule();
+    RobotContainer.hammer.schedule();
+    RobotContainer.driveTrain.drive.feed();
   }
 
   @Override
   public void testInit() {
+    RobotContainer.ILift.actuateSolenoid(true);
+    RobotContainer.leds.setLED(0.71);
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    RobotContainer.driveTrain.drive.feed();
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override

@@ -10,31 +10,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANID;
 
 public class DriveTrain extends SubsystemBase {
-  public final CANSparkMax frontRight = new CANSparkMax(CANID.RIGHT_FRONT_ID , MotorType.kBrushless);
-  public final CANSparkMax backRight = new CANSparkMax(CANID.RIGHT_BACK_ID , MotorType.kBrushless);
-  public final CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
-  public final CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
-
-  //private final RelativeEncoder leftEncoder = frontLeft.getEncoder();
-  //private final RelativeEncoder rightEncoder = frontRight.getEncoder();
-
-  public DifferentialDrive drive = new DifferentialDrive(frontLeft, frontRight);
-
+  public CANSparkMax frontRight = new CANSparkMax(CANID.RIGHT_FRONT_ID , MotorType.kBrushless);
+  public CANSparkMax backRight = new CANSparkMax(CANID.RIGHT_BACK_ID , MotorType.kBrushless);
+  public CANSparkMax frontLeft = new CANSparkMax(CANID.LEFT_FRONT_ID , MotorType.kBrushless);
+  public CANSparkMax backLeft = new CANSparkMax(CANID.LEFT_BACK_ID , MotorType.kBrushless);
+  public DifferentialDrive drive = new DifferentialDrive(backLeft, frontRight);
   /** Creates a new DriveTrain. */
   public DriveTrain() {
+
     frontLeft.restoreFactoryDefaults();
     backLeft.restoreFactoryDefaults();
     frontRight.restoreFactoryDefaults();
     backRight.restoreFactoryDefaults();
+
+    frontLeft.follow(backLeft);
+    backRight.follow(frontRight);
+
     frontRight.setInverted(true);
     backRight.setInverted(true);
-    //frontLeft.setInverted(true);
-    backRight.follow(frontRight);
-    backLeft.follow(frontLeft);
+
     drive.feed();
   }
+  /**
+   * An arcade method of motion control
+   * @param Move Speed to move at
+   * @param Turn Ammount of turn 
+   */
   public void manualDrive(double Move, double Turn){
-    drive.arcadeDrive(-Move, Turn);
+    drive.arcadeDrive(Move, Turn);
     if (Math.abs(Move) < 0.05){
       Move = 0;
     }
@@ -42,11 +45,11 @@ public class DriveTrain extends SubsystemBase {
       Turn = 0;
     }
     drive.feed();
-    
+
   } 
   @Override
   public void periodic() {
-    drive.feedWatchdog();
+    drive.feed();
     // This method will be called once per scheduler run
   }
 }

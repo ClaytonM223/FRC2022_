@@ -31,19 +31,22 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     if (RobotContainer.driverController.getRightBumper()){
       RobotContainer.driveTrain.manualDrive(
-        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonTurnCoeffecient,
-        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonMoveCoeffecient
+        -RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButtonMoveCoeffecient,
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButtonTurnCoeffecient
         );
+        RobotContainer.driveTrain.drive.feed();
     }else if(RobotContainer.driverController.getLeftBumper()){
       RobotContainer.driveTrain.manualDrive(
-        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButton2TurnCoeffecient,
-        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButton2MoveCoeffecient
+        -RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID)*TeleopVariables.SpeedButton2MoveCoeffecient,
+        RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)*TeleopVariables.SpeedButton2TurnCoeffecient
         );
+        RobotContainer.driveTrain.drive.feed();
     }else{
       RobotContainer.driveTrain.manualDrive(
-        RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID),
+        -RobotContainer.GetDriverRawAxis(USB.DRIVER_L_Y_ID),
         RobotContainer.GetDriverRawAxis(USB.DRIVER_R_X_ID)
         );
+        RobotContainer.driveTrain.drive.feed();
     }
   }
 
