@@ -15,7 +15,6 @@ public class TwoBallAuto extends ParallelCommandGroup {
   /** Creates a new TwoBallAuto. */
   public TwoBallAuto() {
     // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new AutoTransfer(false),
       new AutoShoot(true),
@@ -28,7 +27,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
         new WaitCommand(0.5),
         new GyroTurn(137, 0.8),
         new WaitCommand(0.5),
-        new GyroCorrect (180, 0.5), //I see it
+        new GyroCorrect (180, 0.5),
         new WaitCommand(0.5),
         new EncoderDrive(24, 0.7),
         new AutoTransfer(true)
