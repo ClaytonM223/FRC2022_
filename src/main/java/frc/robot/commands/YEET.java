@@ -39,7 +39,6 @@ public class YEET extends CommandBase {
     if (RobotContainer.operatorController.getPOV() == TeleopVariables.D_Pad_Left){
       RobotContainer.shooter.setShooterPower(1);
     }
-
   }
 
   // Called once the command ends or is interrupted.
