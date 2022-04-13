@@ -27,7 +27,7 @@ public class TwoBallAuto extends ParallelCommandGroup {
         new WaitCommand(0.5),
         new GyroTurn(137, 0.8),
         new WaitCommand(0.5),
-        new GyroCorrect (180, 0.5),
+        new GyroCorrect (180, 0.4),
         new WaitCommand(0.5),
         new EncoderDrive(24, 0.7),
         new AutoTransfer(true)

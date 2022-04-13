@@ -63,7 +63,7 @@ public class GyroCorrect extends CommandBase {
       return false;
     }else if(Math.abs(m_angle) < Math.abs(pigeon.getYaw()+1)){
       return false;
-    }else{
+    }else {
       RobotContainer.driveTrain.manualDrive(0, 0);
       return true;
     }
