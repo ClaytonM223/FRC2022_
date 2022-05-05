@@ -7,7 +7,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,9 +26,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private static RobotContainer m_robotContainer;
-
-  private static final PowerDistribution pdh = new PowerDistribution();
-  boolean alliance;
   public RelativeEncoder shooterRPM = Shooter.shooter.getEncoder();
 
 
@@ -59,11 +55,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     RobotContainer.driveTrain.drive.feed();
-    SmartDashboard.putNumber("angle", RobotContainer.gyroTurn.pigeon.getYaw());
-    SmartDashboard.putNumber("Shooter Motor Temp", Shooter.shooter.getMotorTemperature());
-    SmartDashboard.putNumber("PDH Voltage", pdh.getVoltage());
     SmartDashboard.putNumber("Shooter RPM",shooterRPM.getVelocity());
-    SmartDashboard.putBoolean("Alliance", alliance);
     RobotContainer.driveTrain.drive.feed();
     //Shuffelboard things
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
@@ -127,11 +119,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-  }
-
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {
     RobotContainer.arcadeDrive.schedule();
     RobotContainer.nomnom.schedule();
     RobotContainer.lockedAndLoaded.schedule();
@@ -139,6 +126,12 @@ public class Robot extends TimedRobot {
     RobotContainer.upYaGo.schedule();
     RobotContainer.hammer.schedule();
     RobotContainer.driveTrain.drive.feed();
+  }
+
+  /** This function is called periodically during operator control. */
+  @Override
+  public void teleopPeriodic() {
+
   }
 
   @Override
